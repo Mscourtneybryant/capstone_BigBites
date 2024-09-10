@@ -3,7 +3,6 @@ package com.capstone.Capstone_backend.model;
 import com.capstone.Capstone_backend.dto.RestaurantDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.Order;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,10 +10,11 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity //map java class with the database table
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity //map java class with the database table
 public class User {
 
     @Id
@@ -30,6 +30,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer") //tells spring not to create separate
     //table for this mapping
     private List<Order> orders = new ArrayList<>();
+
     @ElementCollection
     private List<RestaurantDto>favorites=new ArrayList();
 

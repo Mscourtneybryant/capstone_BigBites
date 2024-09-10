@@ -10,10 +10,11 @@ import java.util.Date;
 import java.util.List;
 
 
-@Entity
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Order {
 
     @Id
@@ -25,16 +26,18 @@ public class Order {
 
     @ManyToOne
     private Restaurant restaurant;
+
     private Long totalAmount;
     private String orderStatus;
     private Date createdAt;
 
-    @OneToMany
+    @ManyToOne
     private Address deliveryAddress;
 
     @OneToMany
     private List<OrderItem> items;
     //private Payment payment
+
     private int totalItem;
     private int totalPrice;
 

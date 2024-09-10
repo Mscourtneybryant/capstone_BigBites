@@ -7,14 +7,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Restaurant {
 
     @Id
@@ -23,6 +24,7 @@ public class Restaurant {
 
     @OneToOne
     private User owner;
+
     private String name;
     private String description;
     private String cuisineType;
@@ -32,6 +34,7 @@ public class Restaurant {
 
     @Embedded
     private ContactInformation contactInformation;
+
     private String openingHours;
 
     @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL, orphanRemoval = true) //tell spring dont create separate table for this
@@ -40,6 +43,15 @@ public class Restaurant {
     @ElementCollection
     @Column(length = 1000)
     private List<String>images;
+
+    private LocalDateTime registrationDate;
+    private boolean open;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
+    private List<Food> foods=new ArrayList<>();
+
+
 
 
 }
